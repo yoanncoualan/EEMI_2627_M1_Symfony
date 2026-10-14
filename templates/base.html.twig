@@ -19,6 +19,12 @@
         {% endif %}
     </head>
     <body>
+        {% for type, messages in app.flashes %}
+            {% for msg in messages %}
+                <p class="{{ type }}">{{ msg }}</p>
+            {% endfor %}
+        {% endfor %}
+
         {% block body %}{% endblock %}
     </body>
 </html>

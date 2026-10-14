@@ -1,3 +1,6 @@
-body {
-    background-color: skyblue;
+.success{
+    background-color: forestgreen;
+}
+.warning{
+    background-color: lightcoral;
 }

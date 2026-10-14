@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProductController!{% endblock %}
+
+{% block body %}
+<h1>Products</h1>
+
+{% for product in products %}
+    <h2>{{product.title}}</h2>
+    <p>{{product.content}}</p>
+    <p>Category: {{product.category.title}}</p>
+    {% if product.image %}
+        <img src="{{ asset('uploads/' ~ product.image) }}" alt="{{ product.title }}" width="200">
+    {% endif %}
+    <hr/>
+{% else %}
+    <p>Empty set</p>
+{% endfor %}
+
+<h2>Add product</h2>
+{{ form(form) }}
+{% endblock %}
