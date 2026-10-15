@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 use Symfony\Contracts\Translation\TranslatorInterface;
 
+#[Route('/{_locale}',)]
 final class CategorieController extends AbstractController
 {
     #[Route('/categorie', name: 'app_categorie')]
