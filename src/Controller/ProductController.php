@@ -55,4 +55,16 @@ class ProductController extends AbstractController
             'products' => $products,
         ]);
     }
+
+    #[Route('/product/delete/{id}', name: 'app_product_delete', methods: ['POST'])]
+    public function delete(Request $request, EntityManagerInterface $em, Product $product)
+    {
+        if ($this->isCsrfTokenValid('delete' . $product->getId(), $request->request->get('csrf'))) {
+            $em->remove($product);
+            $em->flush();
+
+            $this->addFlash('warning', 'Product deleted');
+        }
+        return $this->redirectToRoute('app_product');
+    }
 }

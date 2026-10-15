@@ -12,10 +12,12 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Form\CategoryType;
 use Symfony\Component\HttpFoundation\Request;
 
+use Symfony\Contracts\Translation\TranslatorInterface;
+
 final class CategorieController extends AbstractController
 {
     #[Route('/categorie', name: 'app_categorie')]
-    public function index(EntityManagerInterface $em, Request $request): Response
+    public function index(EntityManagerInterface $em, Request $request, TranslatorInterface $translator): Response
     {
         $categories = $em->getRepository(Category::class)->findAll();
 
@@ -27,7 +29,7 @@ final class CategorieController extends AbstractController
             $em->persist($category);
             $em->flush();
 
-            $this->addFlash('success', 'Category added');
+            $this->addFlash('success', $translator->trans('category.added'));
 
             return $this->redirectToRoute('app_categorie');
         }
@@ -47,13 +49,13 @@ final class CategorieController extends AbstractController
     }
 
     #[Route('/category/delete/{id}', name: 'app_category_delete', methods: ['POST'])]
-    public function delete(Request $request, EntityManagerInterface $em, Category $category)
+    public function delete(Request $request, EntityManagerInterface $em, Category $category, TranslatorInterface $translator)
     {
         if ($this->isCsrfTokenValid('delete' . $category->getId(), $request->request->get('csrf'))) {
             $em->remove($category);
             $em->flush();
 
-            $this->addFlash('warning', 'Category deleted');
+            $this->addFlash('warning', $translator->trans('category.deleted'));
         }
         return $this->redirectToRoute('app_categorie');
     }

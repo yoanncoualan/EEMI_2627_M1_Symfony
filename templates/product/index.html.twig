@@ -12,6 +12,11 @@
     {% if product.image %}
         <img src="{{ asset('uploads/' ~ product.image) }}" alt="{{ product.title }}" width="200">
     {% endif %}
+
+    <form action="{{path('app_product_delete', {id: product.id})}}" method="POST">
+        <input type="hidden" name="csrf" value="{{ csrf_token('delete' ~ product.id) }}">
+        <input type="submit" value="Delete">
+    </form>
     <hr/>
 {% else %}
     <p>Empty set</p>

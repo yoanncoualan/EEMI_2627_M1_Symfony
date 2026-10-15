@@ -5,7 +5,9 @@ namespace App\Entity;
 use App\Repository\ProductRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 
+#[HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
 {
@@ -98,5 +100,14 @@ class Product
         $this->image = $image;
 
         return $this;
+    }
+
+    #[ORM\PostRemove]
+    public function deleteImage()
+    {
+        if($this->image != null){
+            unlink(__DIR__.'/../../public/uploads/' . $this->image);
+        }
+        return;
     }
 }

@@ -64,6 +64,7 @@ Démarrez votre serveur MySQL (MAMP / XAMPP / WAMP), puis créez la base et ses 
 ```bash
 symfony console doctrine:database:create
 symfony console doctrine:migrations:migrate --no-interaction
+php bin/console importmap:install
 ```
 
 ## 5. Lancer le projet

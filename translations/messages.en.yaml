@@ -1,0 +1,7 @@
+hello: Hello
+ 
+category:
+  title: Categories
+  added: Category added
+  deleted: Category deleted
+  nbr: There are %nb% categories

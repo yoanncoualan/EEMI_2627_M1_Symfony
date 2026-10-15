@@ -1,0 +1,7 @@
+hello: Bonjour
+ 
+category:
+  title: Catégories
+  added: Catégorie ajoutée
+  deleted: Catégorie supprimée
+  nbr: Il y a %nb% catégories
