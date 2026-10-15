@@ -13,8 +13,9 @@ use App\Form\CategoryType;
 use Symfony\Component\HttpFoundation\Request;
 
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-#[Route('/{_locale}',)]
+#[Route('/{_locale}')]
 final class CategorieController extends AbstractController
 {
     #[Route('/categorie', name: 'app_categorie')]
@@ -49,6 +50,7 @@ final class CategorieController extends AbstractController
         ]);
     }
 
+    #[IsGranted('ROLE_ADMIN')]
     #[Route('/category/delete/{id}', name: 'app_category_delete', methods: ['POST'])]
     public function delete(Request $request, EntityManagerInterface $em, Category $category, TranslatorInterface $translator)
     {

@@ -19,6 +19,11 @@
         {% endif %}
     </head>
     <body>
+        {% if app.user %}
+            <p>{{'hello'|trans}}, {{ app.user.email }} 👋!</p>
+            <p><a href="{{ path('app_logout') }}">{{'logout'|trans}}</a></p>
+        {% endif %}
+
         {% for type, messages in app.flashes %}
             {% for msg in messages %}
                 <p class="{{ type }}">{{ msg }}</p>
